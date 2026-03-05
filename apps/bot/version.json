@@ -1,0 +1,17 @@
+{
+    "version": "1.0.0",
+    "changelog": [
+        {
+            "version": "1.0.0",
+            "date": "2026-03-05",
+            "changes": [
+                "Initial release",
+                "Slash command handler with auto-registration",
+                "Prefix command handler",
+                "Event handler system",
+                "Message handler with word filter",
+                "Version tracking system"
+            ]
+        }
+    ]
+}

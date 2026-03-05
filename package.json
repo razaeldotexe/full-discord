@@ -1,0 +1,14 @@
+{
+  "name": "full-discord",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "bot": "npm run dev --workspace=apps/bot",
+    "web": "npm run dev --workspace=apps/web",
+    "bot:build": "npm run build --workspace=apps/bot",
+    "web:build": "npm run build --workspace=apps/web"
+  }
+}
