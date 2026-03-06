@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { ArrowLeft, Save } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function NewWebhookPage() {
     const [form, setForm] = useState({
@@ -42,7 +43,12 @@ export default function NewWebhookPage() {
     };
 
     return (
-        <div className="max-w-2xl mx-auto space-y-6 animate-fade-in">
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="max-w-2xl mx-auto space-y-6"
+        >
             <div className="flex items-center gap-4">
                 <Link href="/dashboard/webhooks">
                     <Button variant="ghost" size="icon">
@@ -114,6 +120,6 @@ export default function NewWebhookPage() {
                     </div>
                 </CardContent>
             </Card>
-        </div>
+        </motion.div>
     );
 }

@@ -5,6 +5,20 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Server, ArrowRight, ExternalLink } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+
+const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+        opacity: 1,
+        transition: { staggerChildren: 0.1 }
+    }
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+};
 
 export default function ServersPage() {
     const [guilds, setGuilds] = useState<any[]>([]);
@@ -53,7 +67,12 @@ export default function ServersPage() {
 
     return (
         <div className="min-h-screen bg-[#09090b] flex flex-col items-center justify-center p-6 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-900/20 via-[#09090b] to-[#09090b]">
-            <div className="w-full max-w-4xl space-y-8 animate-fade-in">
+            <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="show"
+                className="w-full max-w-4xl space-y-8"
+            >
                 <div className="text-center space-y-2">
                     <div className="w-16 h-16 mx-auto rounded-2xl bg-indigo-500/10 flex items-center justify-center mb-6">
                         <Server className="w-8 h-8 text-indigo-400" />
@@ -65,16 +84,21 @@ export default function ServersPage() {
                 </div>
 
                 {guilds.length === 0 ? (
-                    <Card className="border-dashed bg-white/5 border-white/10">
-                        <CardContent className="flex flex-col items-center justify-center py-12 text-center">
-                            <p className="text-gray-400 mb-2">No eligible servers found.</p>
-                            <p className="text-sm text-gray-500">You need Manage Server or Administrator permissions.</p>
-                        </CardContent>
-                    </Card>
+                    <motion.div variants={itemVariants}>
+                        <Card className="border-dashed bg-white/5 border-white/10">
+                            <CardContent className="flex flex-col items-center justify-center py-12 text-center">
+                                <p className="text-gray-400 mb-2">No eligible servers found.</p>
+                                <p className="text-sm text-gray-500">You need Manage Server or Administrator permissions.</p>
+                            </CardContent>
+                        </Card>
+                    </motion.div>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {guilds.map((guild) => (
-                            <button
+                            <motion.button
+                                variants={itemVariants}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
                                 key={guild.id}
                                 onClick={() => handleSelectServer(guild)}
                                 className="group text-left"
@@ -117,11 +141,11 @@ export default function ServersPage() {
                                         </div>
                                     </CardContent>
                                 </Card>
-                            </button>
+                            </motion.button>
                         ))}
                     </div>
                 )}
-            </div>
+            </motion.div>
         </div>
     );
 }

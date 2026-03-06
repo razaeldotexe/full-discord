@@ -3,11 +3,17 @@
 import { signIn } from "next-auth/react";
 import { Bot } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 export default function SignInPage() {
     return (
         <div className="gradient-bg min-h-screen flex items-center justify-center px-6">
-            <div className="w-full max-w-md animate-fade-in">
+            <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full max-w-md"
+            >
                 <div className="text-center mb-8">
                     <div className="inline-flex w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 items-center justify-center mb-4 shadow-2xl shadow-indigo-500/30 animate-pulse-glow">
                         <Bot className="w-8 h-8 text-white" />
@@ -33,7 +39,7 @@ export default function SignInPage() {
                         </p>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </div>
     );
 }

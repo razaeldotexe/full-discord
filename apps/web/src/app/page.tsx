@@ -12,6 +12,7 @@ import {
   Shield,
   BarChart3,
 } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function HomePage() {
   const { data: session } = useSession();
@@ -50,11 +51,21 @@ export default function HomePage() {
       {/* Hero */}
       <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto text-center space-y-8">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-medium animate-fade-in">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-medium"
+          >
             <Zap className="w-4 h-4" /> v1.0.0 — Now Available
-          </div>
+          </motion.div>
 
-          <h1 className="text-3xl sm:text-7xl font-extrabold tracking-tight animate-fade-in" style={{ animationDelay: "0.1s" }}>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-3xl sm:text-7xl font-extrabold tracking-tight"
+          >
             <span className="bg-gradient-to-b from-white via-white to-gray-500 bg-clip-text text-transparent">
               Discord Bot &{" "}
             </span>
@@ -62,14 +73,24 @@ export default function HomePage() {
             <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               Webhook Manager
             </span>
-          </h1>
+          </motion.h1>
 
-          <p className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: "0.2s" }}>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto px-4"
+          >
             The complete ecosystem for managing Discord webhooks, building rich embed messages,
             and controlling your bot — all from a beautiful modern dashboard.
-          </p>
+          </motion.p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
+          >
             <Link href={session ? "/dashboard" : "/auth/signin"} className="w-full sm:w-auto">
               <Button size="lg" className="w-full sm:w-auto px-8 shadow-xl shadow-indigo-500/20">
                 Get Started <ArrowRight className="w-5 h-5 ml-2" />
@@ -80,16 +101,21 @@ export default function HomePage() {
                 Learn More
               </Button>
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Features */}
       <section id="features" className="py-16 sm:py-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent"
+          >
             Everything You Need
-          </h2>
+          </motion.h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
@@ -136,10 +162,14 @@ export default function HomePage() {
                 gradient: "from-rose-500 to-red-600",
               },
             ].map((feature, i) => (
-              <div
+              <motion.div
                 key={i}
-                className="group relative rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur p-6 hover:border-white/10 transition-all duration-300 animate-fade-in"
-                style={{ animationDelay: `${0.1 * i}s` }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="group relative rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur p-6 hover:border-white/10 transition-colors duration-300"
               >
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br opacity-0 group-hover:opacity-5 transition-opacity duration-300" />
                 <div
@@ -149,7 +179,7 @@ export default function HomePage() {
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
                 <p className="text-sm text-gray-400 leading-relaxed">{feature.description}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

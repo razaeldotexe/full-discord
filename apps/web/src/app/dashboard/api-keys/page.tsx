@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Key, Plus, Copy, Trash2, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 function generateApiKey(): string {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -49,7 +50,12 @@ export default function ApiKeysPage() {
     };
 
     return (
-        <div className="max-w-3xl mx-auto space-y-6 animate-fade-in">
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="max-w-3xl mx-auto space-y-6"
+        >
             <div>
                 <h1 className="text-2xl font-bold text-white">API Keys</h1>
                 <p className="text-gray-400 mt-1">Manage API keys for external access to your webhooks</p>
@@ -144,6 +150,6 @@ curl -X POST https://your-domain.com/api/v1/webhook/send \\
                     </pre>
                 </CardContent>
             </Card>
-        </div>
+        </motion.div>
     );
 }

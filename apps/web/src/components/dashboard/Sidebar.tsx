@@ -14,6 +14,9 @@ import {
     RefreshCw,
 } from "lucide-react";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+
+const MotionLink = motion.create(Link);
 
 const navItems = [
     { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
@@ -35,8 +38,11 @@ export function Sidebar({ className }: { className?: string }) {
     }, []);
 
     return (
-        <aside
-            className={`bg-[#0c0c14]/80 backdrop-blur-2xl border-r border-white/5 flex flex-col transition-all duration-300 z-50 animate-fade-in-left ${collapsed ? "w-[72px]" : "w-[260px]"} ${className || ""}`}
+        <motion.aside
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className={`bg-[#0c0c14]/80 backdrop-blur-2xl border-r border-white/5 flex flex-col transition-all duration-300 z-50 ${collapsed ? "w-[72px]" : "w-[260px]"} ${className || ""}`}
         >
             {/* Logo & Server Info */}
             <div className="flex flex-col border-b border-white/5">
@@ -86,14 +92,17 @@ export function Sidebar({ className }: { className?: string }) {
                         pathname === item.href ||
                         (item.href !== "/dashboard" && pathname.startsWith(item.href));
                     return (
-                        <Link
+                        <MotionLink
                             key={item.href}
                             href={item.href}
-                            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 group hover:translate-x-1 animate-fade-in ${isActive
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.1 + index * 0.05, duration: 0.3 }}
+                            whileHover={{ x: 4 }}
+                            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 group ${isActive
                                 ? "bg-indigo-500/15 text-indigo-400 shadow-sm"
                                 : "text-gray-400 hover:text-white hover:bg-white/5"
                                 }`}
-                            style={{ animationDelay: `${0.1 * index}s`, animationFillMode: "both" }}
                         >
                             <item.icon
                                 className={`w-5 h-5 flex-shrink-0 transition-colors ${isActive
@@ -102,7 +111,7 @@ export function Sidebar({ className }: { className?: string }) {
                                     }`}
                             />
                             {!collapsed && <span>{item.label}</span>}
-                        </Link>
+                        </MotionLink>
                     );
                 })}
             </nav>
@@ -123,6 +132,6 @@ export function Sidebar({ className }: { className?: string }) {
                     )}
                 </button>
             </div>
-        </aside>
+        </motion.aside>
     );
 }
