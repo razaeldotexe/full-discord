@@ -20,26 +20,26 @@ export default function HomePage() {
     <div className="gradient-bg min-h-screen">
       {/* Navbar */}
       <nav className="fixed top-0 inset-x-0 z-50 border-b border-white/5 bg-[#0a0a12]/80 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/25">
-              <Bot className="w-5 h-5 text-white" />
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/25 shrink-0">
+              <Bot className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
-            <span className="text-lg font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+            <span className="text-base sm:text-lg font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent truncate">
               Discord Manager
             </span>
           </div>
           <div className="flex items-center gap-4">
             {session ? (
               <Link href="/dashboard">
-                <Button>
-                  Dashboard <ArrowRight className="w-4 h-4 ml-2" />
+                <Button size="sm" className="sm:size-default">
+                  Dashboard <ArrowRight className="hidden sm:inline w-4 h-4 ml-2" />
                 </Button>
               </Link>
             ) : (
               <Link href="/auth/signin">
-                <Button>
-                  Sign In with Discord <ArrowRight className="w-4 h-4 ml-2" />
+                <Button size="sm" className="sm:size-default">
+                  Sign In <span className="hidden sm:inline">with Discord</span> <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </Link>
             )}
@@ -48,13 +48,13 @@ export default function HomePage() {
       </nav>
 
       {/* Hero */}
-      <section className="relative pt-32 pb-20 px-6">
+      <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto text-center space-y-8">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-medium animate-fade-in">
             <Zap className="w-4 h-4" /> v1.0.0 — Now Available
           </div>
 
-          <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight animate-fade-in" style={{ animationDelay: "0.1s" }}>
+          <h1 className="text-3xl sm:text-7xl font-extrabold tracking-tight animate-fade-in" style={{ animationDelay: "0.1s" }}>
             <span className="bg-gradient-to-b from-white via-white to-gray-500 bg-clip-text text-transparent">
               Discord Bot &{" "}
             </span>
@@ -64,19 +64,19 @@ export default function HomePage() {
             </span>
           </h1>
 
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: "0.2s" }}>
+          <p className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: "0.2s" }}>
             The complete ecosystem for managing Discord webhooks, building rich embed messages,
             and controlling your bot — all from a beautiful modern dashboard.
           </p>
 
-          <div className="flex items-center justify-center gap-4 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-            <Link href={session ? "/dashboard" : "/auth/signin"}>
-              <Button size="lg" className="px-8 shadow-xl shadow-indigo-500/20">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+            <Link href={session ? "/dashboard" : "/auth/signin"} className="w-full sm:w-auto">
+              <Button size="lg" className="w-full sm:w-auto px-8 shadow-xl shadow-indigo-500/20">
                 Get Started <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>
-            <Link href="#features">
-              <Button variant="outline" size="lg">
+            <Link href="#features" className="w-full sm:w-auto">
+              <Button variant="outline" size="lg" className="w-full sm:w-auto">
                 Learn More
               </Button>
             </Link>
@@ -85,7 +85,7 @@ export default function HomePage() {
       </section>
 
       {/* Features */}
-      <section id="features" className="py-20 px-6">
+      <section id="features" className="py-16 sm:py-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
             Everything You Need
@@ -156,8 +156,8 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 py-8 px-6">
-        <div className="max-w-6xl mx-auto flex items-center justify-between text-sm text-gray-500">
+      <footer className="border-t border-white/5 py-8 px-4 sm:px-6">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500 text-center sm:text-left">
           <p>&copy; 2026 Discord Bot & Webhook Manager</p>
           <div className="flex items-center gap-1">
             Built with

@@ -5,17 +5,26 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Webhook, MoreVertical, ExternalLink, Trash2, Pencil } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
-
-// Demo data — in production this would be fetched from the API
-const DEMO_WEBHOOKS = [
-    { id: "1", name: "Announcements Bot", channelId: "general", guildId: "My Server", createdAt: "2026-03-01" },
-    { id: "2", name: "Alerts Webhook", channelId: "alerts", guildId: "My Server", createdAt: "2026-03-03" },
-    { id: "3", name: "Log Bot", channelId: "server-logs", guildId: "Dev Server", createdAt: "2026-03-05" },
-];
+import { useEffect, useState } from "react";
 
 export default function WebhooksPage() {
-    const [webhooks] = useState(DEMO_WEBHOOKS);
+    const [webhooks, setWebhooks] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchWebhooks = async () => {
+            try {
+                const res = await fetch("/api/v1/webhooks");
+                const data = await res.json();
+                if (data.webhooks) setWebhooks(data.webhooks);
+            } catch (error) {
+                console.error("Failed to load webhooks", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchWebhooks();
+    }, []);
 
     return (
         <div className="space-y-6 animate-fade-in">
@@ -71,7 +80,7 @@ export default function WebhooksPage() {
                                     </div>
                                     <div className="flex items-center justify-between text-xs">
                                         <span className="text-gray-500">Created</span>
-                                        <span className="text-gray-300">{webhook.createdAt}</span>
+                                        <span className="text-gray-300">{new Date(webhook.createdAt).toLocaleDateString()}</span>
                                     </div>
                                 </div>
 

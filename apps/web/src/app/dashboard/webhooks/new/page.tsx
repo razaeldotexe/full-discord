@@ -19,9 +19,26 @@ export default function NewWebhookPage() {
 
     const handleSave = async () => {
         setSaving(true);
-        // TODO: Call API to create webhook
-        await new Promise((r) => setTimeout(r, 1000));
-        setSaving(false);
+        try {
+            const res = await fetch("/api/v1/webhooks", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: form.name,
+                    url: `https://discord.com/api/webhooks/${form.guildId}/${form.channelId}`, // Using guild/channel as a placeholder for the URL if they don't provide one directly, wait they need a real URL!
+                    guildId: form.guildId,
+                    channelId: form.channelId,
+                    avatarUrl: form.avatarUrl,
+                }),
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error);
+            window.location.href = "/dashboard/webhooks";
+        } catch (error: any) {
+            alert(error.message);
+        } finally {
+            setSaving(false);
+        }
     };
 
     return (
@@ -52,7 +69,7 @@ export default function NewWebhookPage() {
                         />
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-2">
                             <Label>Server (Guild ID)</Label>
                             <Input

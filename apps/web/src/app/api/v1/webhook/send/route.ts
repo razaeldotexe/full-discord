@@ -4,27 +4,20 @@ import { sendWebhookMessage } from "@/lib/discord";
 
 export async function POST(request: NextRequest) {
     try {
-        // Validate API key
         const authHeader = request.headers.get("authorization");
-        if (!authHeader || !authHeader.startsWith("Bearer ")) {
-            return NextResponse.json(
-                { error: "Missing or invalid Authorization header. Use: Bearer <api_key>" },
-                { status: 401 }
-            );
-        }
+        let keyRecord = null;
 
-        const apiKey = authHeader.replace("Bearer ", "");
-
-        // Look up the API key in the database
-        let keyRecord;
-        try {
-            keyRecord = await prisma.apiKey.findUnique({
-                where: { key: apiKey },
-                include: { user: true },
-            });
-        } catch {
-            // If DB is not set up, allow demo mode
-            keyRecord = null;
+        if (authHeader && authHeader.startsWith("Bearer ")) {
+            const apiKey = authHeader.replace("Bearer ", "");
+            try {
+                keyRecord = await prisma.apiKey.findUnique({
+                    where: { key: apiKey },
+                    include: { user: true },
+                });
+            } catch {
+                // If DB is not set up, allow demo mode
+                keyRecord = null;
+            }
         }
 
         // Parse body
@@ -42,6 +35,14 @@ export async function POST(request: NextRequest) {
             return NextResponse.json(
                 { error: "Either content or embeds is required" },
                 { status: 400 }
+            );
+        }
+
+        // Require API key if they are fetching from DB using webhookId
+        if (webhookId && !webhookUrl && !keyRecord) {
+            return NextResponse.json(
+                { error: "Provide a direct webhookUrl, or use an API key to send via webhookId" },
+                { status: 401 }
             );
         }
 
@@ -76,8 +77,8 @@ export async function POST(request: NextRequest) {
                 await prisma.message.create({
                     data: {
                         content: content || null,
-                        embeds: embeds ? JSON.parse(JSON.stringify(embeds)) : null,
-                        buttons: components ? JSON.parse(JSON.stringify(components)) : null,
+                        embeds: embeds ? JSON.stringify(embeds) : null,
+                        buttons: components ? JSON.stringify(components) : null,
                         webhookId,
                         userId: keyRecord.userId,
                     },

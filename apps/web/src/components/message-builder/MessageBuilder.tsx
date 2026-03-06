@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Label } from "../ui/label";
@@ -10,8 +10,10 @@ import { EmbedEditor, type EmbedData } from "./EmbedEditor";
 import { ButtonEditor, type ButtonData } from "./ButtonEditor";
 import { DiscordPreview } from "./DiscordPreview";
 import { Send, Plus, Eye, Code } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 export interface MessageData {
+    webhookUrl?: string;
     content: string;
     username: string;
     avatarUrl: string;
@@ -25,7 +27,11 @@ interface MessageBuilderProps {
 }
 
 export function MessageBuilder({ webhookUrl, onSend }: MessageBuilderProps) {
+    const searchParams = useSearchParams();
+    const defaultWebhookId = searchParams.get("webhookId");
+
     const [message, setMessage] = useState<MessageData>({
+        webhookUrl: webhookUrl || "",
         content: "",
         username: "",
         avatarUrl: "",
@@ -35,6 +41,35 @@ export function MessageBuilder({ webhookUrl, onSend }: MessageBuilderProps) {
     const [sending, setSending] = useState(false);
     const [showPreview, setShowPreview] = useState(true);
     const [showJson, setShowJson] = useState(false);
+
+    const [savedWebhooks, setSavedWebhooks] = useState<any[]>([]);
+    const [selectedWebhookId, setSelectedWebhookId] = useState<string>(defaultWebhookId || "custom");
+
+    useEffect(() => {
+        const fetchWebhooks = async () => {
+            try {
+                const res = await fetch("/api/v1/webhooks");
+                const data = await res.json();
+                if (data.webhooks && data.webhooks.length > 0) {
+                    setSavedWebhooks(data.webhooks);
+
+                    if (defaultWebhookId) {
+                        const target = data.webhooks.find((w: any) => w.id === defaultWebhookId);
+                        if (target) {
+                            setSelectedWebhookId(target.id);
+                            setMessage((p) => ({ ...p, webhookUrl: target.url }));
+                        }
+                    } else if (!webhookUrl) {
+                        setSelectedWebhookId(data.webhooks[0].id);
+                        setMessage((p) => ({ ...p, webhookUrl: data.webhooks[0].url }));
+                    }
+                }
+            } catch (error) {
+                console.error("Failed to fetch webhooks", error);
+            }
+        };
+        fetchWebhooks();
+    }, [webhookUrl, defaultWebhookId]);
 
     const addEmbed = () => {
         setMessage((prev) => ({
@@ -144,6 +179,45 @@ export function MessageBuilder({ webhookUrl, onSend }: MessageBuilderProps) {
                         <CardTitle className="text-base">📝 Message Content</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
+                        <div className="space-y-4 pb-2 mb-2 border-b border-white/10">
+                            <div className="space-y-2">
+                                <Label className="text-indigo-400">Select Webhook</Label>
+                                <select
+                                    className="flex h-10 w-full rounded-md border border-white/10 bg-black/40 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500 disabled:cursor-not-allowed disabled:opacity-50 text-white"
+                                    value={selectedWebhookId}
+                                    onChange={(e) => {
+                                        setSelectedWebhookId(e.target.value);
+                                        if (e.target.value === "custom") {
+                                            setMessage((p) => ({ ...p, webhookUrl: "" }));
+                                        } else {
+                                            const wh = savedWebhooks.find(w => w.id === e.target.value);
+                                            if (wh) {
+                                                setMessage((p) => ({ ...p, webhookUrl: wh.url }));
+                                            }
+                                        }
+                                    }}
+                                >
+                                    <option value="custom" className="bg-slate-900">Custom URL...</option>
+                                    {savedWebhooks.map(wh => (
+                                        <option key={wh.id} value={wh.id} className="bg-slate-900">{wh.name}</option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            {selectedWebhookId === "custom" && (
+                                <div className="space-y-2 pb-2">
+                                    <Label className="text-indigo-400">Webhook URL (Required)</Label>
+                                    <Input
+                                        placeholder="https://discord.com/api/webhooks/..."
+                                        value={message.webhookUrl}
+                                        onChange={(e) =>
+                                            setMessage((p) => ({ ...p, webhookUrl: e.target.value }))
+                                        }
+                                        className="border-indigo-500/30 focus-visible:ring-indigo-500/50 bg-indigo-500/5 text-xs font-mono"
+                                    />
+                                </div>
+                            )}
+                        </div>
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <Label>Username Override</Label>
@@ -236,7 +310,7 @@ export function MessageBuilder({ webhookUrl, onSend }: MessageBuilderProps) {
                 <div className="flex gap-3">
                     <Button
                         onClick={handleSend}
-                        disabled={sending || (!message.content && message.embeds.length === 0)}
+                        disabled={sending || (!message.content && message.embeds.length === 0) || !message.webhookUrl}
                         className="flex-1"
                     >
                         <Send className="w-4 h-4 mr-2" />
