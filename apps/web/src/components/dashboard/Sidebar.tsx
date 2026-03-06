@@ -25,7 +25,7 @@ const navItems = [
     { href: "/dashboard/api-keys", label: "API Keys", icon: Key },
 ];
 
-export function Sidebar({ className }: { className?: string }) {
+export function Sidebar({ className, onItemClick }: { className?: string; onItemClick?: () => void }) {
     const pathname = usePathname();
     const [collapsed, setCollapsed] = useState(false);
     const [selectedGuild, setSelectedGuild] = useState<any>(null);
@@ -75,6 +75,7 @@ export function Sidebar({ className }: { className?: string }) {
                                 <p className="text-xs font-semibold text-white truncate">{selectedGuild.name}</p>
                                 <Link
                                     href="/servers"
+                                    onClick={onItemClick}
                                     className="text-[10px] text-indigo-400 hover:text-indigo-300 flex items-center gap-1 mt-0.5"
                                 >
                                     <RefreshCw className="w-2.5 h-2.5" />
@@ -103,6 +104,7 @@ export function Sidebar({ className }: { className?: string }) {
                                 ? "bg-indigo-500/15 text-indigo-400 shadow-sm"
                                 : "text-gray-400 hover:text-white hover:bg-white/5"
                                 }`}
+                            onClick={onItemClick}
                         >
                             <item.icon
                                 className={`w-5 h-5 flex-shrink-0 transition-colors ${isActive
@@ -132,6 +134,6 @@ export function Sidebar({ className }: { className?: string }) {
                     )}
                 </button>
             </div>
-        </motion.aside>
+        </motion.aside >
     );
 }

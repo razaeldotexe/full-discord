@@ -10,6 +10,7 @@ import { Sidebar } from "./Sidebar";
 export function Header() {
     const { data: session } = useSession();
     const [selectedGuild, setSelectedGuild] = useState<any>(null);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         const guild = localStorage.getItem("selected_guild");
@@ -23,7 +24,7 @@ export function Header() {
             <div className="flex items-center gap-4">
                 {/* Mobile Toggle */}
                 <div className="md:hidden">
-                    <Sheet>
+                    <Sheet open={open} onOpenChange={setOpen}>
                         <SheetTrigger asChild>
                             <Button variant="ghost" size="icon" className="text-gray-400">
                                 <Menu className="w-6 h-6" />
@@ -31,7 +32,7 @@ export function Header() {
                         </SheetTrigger>
                         <SheetContent side="left" className="p-0 w-[260px] bg-[#0c0c14] border-r-white/5">
                             <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-                            <Sidebar className="h-full border-none" />
+                            <Sidebar className="h-full border-none" onItemClick={() => setOpen(false)} />
                         </SheetContent>
                     </Sheet>
                 </div>
