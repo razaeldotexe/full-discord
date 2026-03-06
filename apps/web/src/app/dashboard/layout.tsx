@@ -33,10 +33,10 @@ export default function DashboardLayout({
 
     if (status === "loading" || isChecking) {
         return (
-            <div className="gradient-bg min-h-screen flex items-center justify-center">
+            <div className="bg-zinc-950 min-h-screen flex items-center justify-center">
                 <div className="flex flex-col items-center gap-4">
-                    <div className="w-12 h-12 rounded-full border-4 border-indigo-500/30 border-t-indigo-500 animate-spin" />
-                    <p className="text-gray-400 text-sm">Loading...</p>
+                    <div className="w-12 h-12 rounded-full border-4 border-orange-500/30 border-t-orange-500 animate-spin" />
+                    <p className="text-zinc-400 text-sm">Loading...</p>
                 </div>
             </div>
         );
@@ -45,11 +45,11 @@ export default function DashboardLayout({
 
 
     return (
-        <div className="gradient-bg min-h-screen">
+        <div className="bg-zinc-950 min-h-screen text-zinc-50">
             {/* Desktop Layout Grid */}
             <div className="flex min-h-screen w-full overflow-x-hidden">
                 {/* Sidebar - Desktop Only */}
-                <aside className="hidden md:flex w-[260px] shrink-0 border-r border-white/5 bg-[#0c0c14]/80 backdrop-blur-2xl sticky top-0 h-screen">
+                <aside className="hidden md:flex w-[260px] shrink-0 border-r border-zinc-800 bg-zinc-950 sticky top-0 h-screen">
                     <Sidebar className="flex-1" />
                 </aside>
 
