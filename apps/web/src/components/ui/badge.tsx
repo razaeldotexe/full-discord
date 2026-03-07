@@ -16,7 +16,7 @@ function Badge({ className, variant = "default", ...props }: BadgeProps) {
         success: "bg-emerald-500/15 text-emerald-400 border-emerald-500/20",
         warning: "bg-amber-500/15 text-amber-400 border-amber-500/20",
         danger: "bg-red-500/15 text-red-400 border-red-500/20",
-        info: "bg-indigo-500/15 text-indigo-400 border-indigo-500/20",
+        info: "bg-orange-500/15 text-orange-500 border-orange-500/20",
     };
 
     return (

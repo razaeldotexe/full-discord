@@ -63,8 +63,8 @@ export default function WebhooksPage() {
                 <motion.div variants={itemVariants}>
                     <Card className="border-dashed">
                         <CardContent className="flex flex-col items-center justify-center py-16">
-                            <div className="w-16 h-16 rounded-2xl bg-indigo-500/10 flex items-center justify-center mb-4">
-                                <Webhook className="w-8 h-8 text-indigo-400" />
+                            <div className="w-16 h-16 rounded-2xl bg-orange-500/10 flex items-center justify-center mb-4">
+                                <Webhook className="w-8 h-8 text-orange-500" />
                             </div>
                             <h3 className="text-lg font-semibold text-white mb-1">No webhooks yet</h3>
                             <p className="text-sm text-gray-400 mb-4">Create your first webhook to get started</p>
@@ -84,8 +84,8 @@ export default function WebhooksPage() {
                                 <CardContent className="p-5">
                                     <div className="flex items-start justify-between mb-3">
                                         <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-                                                <Webhook className="w-5 h-5 text-white" />
+                                            <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center shadow-lg shadow-orange-500/20">
+                                                <Webhook className="w-5 h-5 text-zinc-950" />
                                             </div>
                                             <div>
                                                 <h3 className="font-semibold text-white text-sm">{webhook.name}</h3>

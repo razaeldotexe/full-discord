@@ -65,7 +65,7 @@ export default function ApiKeysPage() {
             <Card>
                 <CardHeader>
                     <CardTitle className="text-base flex items-center gap-2">
-                        <Plus className="w-5 h-5 text-indigo-400" /> Create New Key
+                        <Plus className="w-5 h-5 text-orange-500" /> Create New Key
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -94,8 +94,8 @@ export default function ApiKeysPage() {
                         <CardContent className="p-4">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center">
-                                        <Key className="w-5 h-5 text-amber-400" />
+                                    <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center">
+                                        <Key className="w-5 h-5 text-orange-500" />
                                     </div>
                                     <div>
                                         <h3 className="font-medium text-white text-sm">{apiKey.name}</h3>
@@ -113,7 +113,7 @@ export default function ApiKeysPage() {
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <Badge variant="info">{apiKey.createdAt}</Badge>
+                                    <Badge className="bg-orange-500/15 text-orange-500 border-orange-500/20 hover:bg-orange-500/25">{apiKey.createdAt}</Badge>
                                     <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-white" onClick={() => handleCopy(apiKey.key)}>
                                         <Copy className="w-3.5 h-3.5" />
                                     </Button>

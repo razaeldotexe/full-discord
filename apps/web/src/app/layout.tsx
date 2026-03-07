@@ -6,9 +6,9 @@ import { Providers } from "./providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Discord Bot & Webhook Manager",
-  description: "Manage your Discord webhooks, build rich messages with embeds and buttons, and control your bot from a modern dashboard.",
-  keywords: ["Discord", "Webhook", "Bot", "Manager", "Dashboard"],
+  title: "Foho Webhook Manager",
+  description: "Advanced Discord webhook management and message builder.",
+  keywords: ["Discord", "Webhook", "Foho", "Manager", "Dashboard"],
 };
 
 export default function RootLayout({

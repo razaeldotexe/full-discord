@@ -45,7 +45,6 @@ export default function DashboardPage() {
                 </p>
             </motion.div>
 
-            {/* Stats Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <motion.div variants={itemVariants}>
                     <StatsCard
@@ -53,7 +52,6 @@ export default function DashboardPage() {
                         value="—"
                         description="Connected guilds"
                         icon={Server}
-                        gradient="from-indigo-500 to-blue-600"
                     />
                 </motion.div>
                 <motion.div variants={itemVariants}>
@@ -62,7 +60,6 @@ export default function DashboardPage() {
                         value="—"
                         description="Total members"
                         icon={Users}
-                        gradient="from-purple-500 to-pink-600"
                     />
                 </motion.div>
                 <motion.div variants={itemVariants}>
@@ -71,7 +68,6 @@ export default function DashboardPage() {
                         value="—"
                         description="Active webhooks"
                         icon={Webhook}
-                        gradient="from-emerald-500 to-teal-600"
                     />
                 </motion.div>
                 <motion.div variants={itemVariants}>
@@ -80,7 +76,6 @@ export default function DashboardPage() {
                         value="—"
                         description="This month"
                         icon={MessageSquare}
-                        gradient="from-amber-500 to-orange-600"
                     />
                 </motion.div>
             </div>
@@ -91,16 +86,16 @@ export default function DashboardPage() {
                     <Card className="h-full">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2 text-base">
-                                <Activity className="w-5 h-5 text-indigo-400" />
+                                <Activity className="w-5 h-5 text-orange-500" />
                                 Recent Activity
                             </CardTitle>
                         </CardHeader>
                         <CardContent>
                             <div className="space-y-4">
                                 {[
-                                    { action: "Bot started", time: "Just now", color: "bg-emerald-500" },
-                                    { action: "Dashboard connected", time: "1 min ago", color: "bg-indigo-500" },
-                                    { action: "System ready", time: "2 min ago", color: "bg-purple-500" },
+                                    { action: "Bot started", time: "Just now", color: "bg-orange-500" },
+                                    { action: "Dashboard connected", time: "1 min ago", color: "bg-orange-500/80" },
+                                    { action: "System ready", time: "2 min ago", color: "bg-orange-500/60" },
                                 ].map((item, i) => (
                                     <div key={i} className="flex items-center gap-3">
                                         <div className={`w-2 h-2 rounded-full ${item.color}`} />
@@ -124,17 +119,17 @@ export default function DashboardPage() {
                         <CardContent>
                             <div className="grid grid-cols-2 gap-3">
                                 {[
-                                    { label: "New Webhook", href: "/dashboard/webhooks/new", icon: Webhook, color: "from-indigo-500 to-blue-600" },
-                                    { label: "Send Message", href: "/dashboard/messages/new", icon: MessageSquare, color: "from-purple-500 to-pink-600" },
-                                    { label: "Bot Stats", href: "#", icon: Activity, color: "from-emerald-500 to-teal-600" },
-                                    { label: "API Keys", href: "/dashboard/api-keys", icon: Key, color: "from-amber-500 to-orange-600" },
+                                    { label: "New Webhook", href: "/dashboard/webhooks/new", icon: Webhook, color: "bg-orange-500" },
+                                    { label: "Send Message", href: "/dashboard/messages/new", icon: MessageSquare, color: "bg-orange-500" },
+                                    { label: "Bot Stats", href: "#", icon: Activity, color: "bg-orange-500" },
+                                    { label: "API Keys", href: "/dashboard/api-keys", icon: Key, color: "bg-orange-500" },
                                 ].map((action, i) => (
                                     <a
                                         key={i}
                                         href={action.href}
-                                        className="group flex items-center gap-3 p-3 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/5 hover:border-white/10 transition-all duration-200"
+                                        className="group flex items-center gap-3 p-3 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/5 hover:border-white/10 transition-all duration-200 hover:shadow-[0_0_15px_rgba(249,115,22,0.15)] hover:border-orange-500/50"
                                     >
-                                        <div className={`w-9 h-9 rounded-lg bg-gradient-to-br ${action.color} flex items-center justify-center`}>
+                                        <div className={`w-9 h-9 rounded-lg ${action.color} flex items-center justify-center shadow-lg shadow-orange-500/20`}>
                                             <action.icon className="w-4 h-4 text-white" />
                                         </div>
                                         <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">

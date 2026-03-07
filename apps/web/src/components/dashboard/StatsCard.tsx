@@ -10,7 +10,7 @@ interface StatsCardProps {
     description?: string;
     icon: LucideIcon;
     trend?: { value: number; positive: boolean };
-    gradient?: string;
+    themeColor?: string;
 }
 
 export function StatsCard({
@@ -19,16 +19,16 @@ export function StatsCard({
     description,
     icon: Icon,
     trend,
-    gradient = "from-indigo-500 to-purple-600",
+    themeColor = "bg-orange-500",
 }: StatsCardProps) {
     return (
         <MotionCard
             whileHover={{ y: -4, transition: { duration: 0.2 } }}
             className="relative overflow-hidden group hover:border-white/20 transition-all duration-300"
         >
-            {/* Gradient glow */}
+            {/* Glow effect */}
             <div
-                className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
+                className={`absolute inset-0 ${themeColor} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
             />
             <CardContent className="p-6">
                 <div className="flex items-start justify-between">
@@ -48,7 +48,7 @@ export function StatsCard({
                         )}
                     </div>
                     <div
-                        className={`p-3 rounded-xl bg-gradient-to-br ${gradient} shadow-lg`}
+                        className={`p-3 rounded-xl ${themeColor} shadow-lg shadow-orange-500/20`}
                     >
                         <Icon className="w-6 h-6 text-white" />
                     </div>

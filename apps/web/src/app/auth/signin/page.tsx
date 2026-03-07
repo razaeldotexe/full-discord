@@ -1,7 +1,7 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { Bot } from "lucide-react";
+import { Anchor } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
@@ -15,11 +15,11 @@ export default function SignInPage() {
                 className="w-full max-w-md"
             >
                 <div className="text-center mb-8">
-                    <div className="inline-flex w-16 h-16 rounded-2xl bg-orange-500 items-center justify-center mb-4">
-                        <Bot className="w-8 h-8 text-zinc-950" />
+                    <div className="inline-flex w-16 h-16 rounded-2xl bg-orange-500 items-center justify-center mb-4 shadow-2xl shadow-orange-500/30">
+                        <Anchor className="w-8 h-8 text-zinc-950" />
                     </div>
-                    <h1 className="text-3xl font-bold text-zinc-100">Welcome Back</h1>
-                    <p className="text-zinc-400 mt-2">Sign in to manage your Discord webhooks</p>
+                    <h1 className="text-3xl font-bold text-white">Welcome Back</h1>
+                    <p className="text-gray-400 mt-2">Sign in to manage your Foho webhooks</p>
                 </div>
 
                 <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-8 space-y-6">

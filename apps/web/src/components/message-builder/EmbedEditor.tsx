@@ -59,7 +59,7 @@ export function EmbedEditor({ embed, index, onChange, onRemove }: EmbedEditorPro
             <div className="flex items-center justify-between px-4 py-3 bg-white/5">
                 <button
                     onClick={() => setExpanded(!expanded)}
-                    className="flex items-center gap-2 text-sm font-medium text-white hover:text-indigo-400 transition-colors"
+                    className="flex items-center gap-2 text-sm font-medium text-white hover:text-orange-500 transition-colors"
                 >
                     {expanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                     Embed {index + 1}{embed.title ? ` — ${embed.title}` : ""}

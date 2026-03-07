@@ -60,13 +60,13 @@ export default function ServersPage() {
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-[#09090b]">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-500"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-[#09090b] flex flex-col items-center justify-center p-6 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-900/20 via-[#09090b] to-[#09090b]">
+        <div className="min-h-screen bg-[#09090b] flex flex-col items-center justify-center p-6 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-orange-900/20 via-[#09090b] to-[#09090b]">
             <motion.div
                 variants={containerVariants}
                 initial="hidden"
@@ -74,8 +74,8 @@ export default function ServersPage() {
                 className="w-full max-w-4xl space-y-8"
             >
                 <div className="text-center space-y-2">
-                    <div className="w-16 h-16 mx-auto rounded-2xl bg-indigo-500/10 flex items-center justify-center mb-6">
-                        <Server className="w-8 h-8 text-indigo-400" />
+                    <div className="w-16 h-16 mx-auto rounded-2xl bg-orange-500/10 flex items-center justify-center mb-6">
+                        <Server className="w-8 h-8 text-orange-500" />
                     </div>
                     <h1 className="text-3xl font-bold text-white tracking-tight">Select a Server</h1>
                     <p className="text-gray-400 max-w-lg mx-auto">
@@ -103,7 +103,7 @@ export default function ServersPage() {
                                 onClick={() => handleSelectServer(guild)}
                                 className="group text-left"
                             >
-                                <Card className={`h-full transition-all duration-300 border-white/5 bg-white/[0.02] hover:bg-white/[0.04] ${!guild.botInGuild ? 'opacity-60 hover:opacity-100 grayscale hover:grayscale-0' : 'hover:border-indigo-500/50 hover:shadow-[0_0_15px_rgba(99,102,241,0.15)]'}`}>
+                                <Card className={`h-full transition-all duration-300 border-white/5 bg-white/[0.02] hover:bg-white/[0.04] ${!guild.botInGuild ? 'opacity-60 hover:opacity-100 grayscale hover:grayscale-0' : 'hover:border-orange-500/50 hover:shadow-[0_0_15px_rgba(249,115,22,0.15)]'}`}>
                                     <CardContent className="p-5 flex items-center justify-between">
                                         <div className="flex items-center gap-4 truncate">
                                             <div className="shrink-0 w-12 h-12 rounded-xl overflow-hidden bg-slate-800 flex items-center justify-center text-lg font-bold">
@@ -130,7 +130,7 @@ export default function ServersPage() {
                                         </div>
                                         <div className="shrink-0 ml-2">
                                             {guild.botInGuild ? (
-                                                <div className="w-8 h-8 rounded-full bg-indigo-500/10 flex items-center justify-center group-hover:bg-indigo-500 group-hover:text-white text-indigo-400 transition-colors">
+                                                <div className="w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center group-hover:bg-orange-500 group-hover:text-zinc-950 text-orange-500 transition-colors">
                                                     <ArrowRight className="w-4 h-4" />
                                                 </div>
                                             ) : (

@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
-  Bot,
+  Anchor, // Changed from Bot to Anchor
   Webhook,
   MessageSquarePlus,
   Zap,
@@ -24,10 +24,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-md bg-orange-500 flex items-center justify-center shrink-0">
-              <Bot className="w-4 h-4 sm:w-5 sm:h-5 text-zinc-950" />
+              <Anchor className="w-4 h-4 sm:w-5 sm:h-5 text-zinc-950" /> {/* Changed Bot to Anchor */}
             </div>
             <span className="text-base sm:text-lg font-bold text-zinc-100 truncate">
-              Discord Manager
+              Foho {/* Changed "Discord Manager" to "Foho" */}
             </span>
           </div>
           <div className="flex items-center gap-4">
@@ -65,7 +65,7 @@ export default function HomePage() {
             className="text-4xl sm:text-7xl font-extrabold tracking-tight"
           >
             <span className="text-zinc-100">
-              Discord Bot &{" "}
+              Foho {/* Changed "Discord Bot & " to "Foho" */}
             </span>
             <br />
             <span className="text-orange-500">
@@ -136,7 +136,7 @@ export default function HomePage() {
                   "Send messages programmatically via API keys. Perfect for monitoring systems and automation.",
               },
               {
-                icon: Bot,
+                icon: Anchor, // Changed Bot to Anchor
                 title: "Smart Bot",
                 description:
                   "High-performance bot with slash commands, prefix commands, auto-moderation, and version tracking.",
@@ -180,7 +180,7 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="border-t border-zinc-800 py-8 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500 text-center sm:text-left">
-          <p>&copy; 2026 Discord Bot & Webhook Manager</p>
+          <p>&copy; 2026 Foho</p> {/* Changed "Discord Bot & Webhook Manager" to "Foho" */}
           <div className="flex items-center gap-1">
             Built with
             <span className="text-red-400">♥</span>

@@ -49,8 +49,8 @@ export default function DashboardLayout({
             {/* Desktop Layout Grid */}
             <div className="flex min-h-screen w-full overflow-x-hidden">
                 {/* Sidebar - Desktop Only */}
-                <aside className="hidden md:flex w-[260px] shrink-0 border-r border-zinc-800 bg-zinc-950 sticky top-0 h-screen">
-                    <Sidebar className="flex-1" />
+                <aside className="hidden md:flex shrink-0 border-r border-zinc-800 bg-zinc-950 sticky top-0 h-screen">
+                    <Sidebar className="flex-1 h-full" />
                 </aside>
 
                 {/* Main Content Area */}

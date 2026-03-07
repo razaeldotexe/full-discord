@@ -180,10 +180,10 @@ export function MessageBuilder({ webhookUrl, onSend }: MessageBuilderProps) {
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div className="space-y-4 pb-2 mb-2 border-b border-white/10">
-                            <div className="space-y-2">
-                                <Label className="text-indigo-400">Select Webhook</Label>
+                            <div className="space-y-4 pt-4 border-t border-white/10">
+                                <Label className="text-orange-500">Select Webhook</Label>
                                 <select
-                                    className="flex h-10 w-full rounded-md border border-white/10 bg-black/40 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500 disabled:cursor-not-allowed disabled:opacity-50 text-white"
+                                    className="flex h-10 w-full rounded-md border border-white/10 bg-black/40 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-orange-500 disabled:cursor-not-allowed disabled:opacity-50 text-white"
                                     value={selectedWebhookId}
                                     onChange={(e) => {
                                         setSelectedWebhookId(e.target.value);
@@ -206,15 +206,15 @@ export function MessageBuilder({ webhookUrl, onSend }: MessageBuilderProps) {
 
                             {selectedWebhookId === "custom" && (
                                 <div className="space-y-2 pb-2">
-                                    <Label className="text-indigo-400">Webhook URL (Required)</Label>
-                                    <Input
-                                        placeholder="https://discord.com/api/webhooks/..."
-                                        value={message.webhookUrl}
-                                        onChange={(e) =>
-                                            setMessage((p) => ({ ...p, webhookUrl: e.target.value }))
-                                        }
-                                        className="border-indigo-500/30 focus-visible:ring-indigo-500/50 bg-indigo-500/5 text-xs font-mono"
-                                    />
+                                    <div className="space-y-4 pt-4 border-t border-white/10">
+                                        <Label className="text-orange-500">Webhook URL (Required)</Label>
+                                        <Input
+                                            value={message.webhookUrl}
+                                            onChange={(e) => setMessage((p) => ({ ...p, webhookUrl: e.target.value }))}
+                                            placeholder="https://discord.com/api/webhooks/..."
+                                            className="border-orange-500/30 focus-visible:ring-orange-500/50 bg-orange-500/5 text-xs font-mono"
+                                        />
+                                    </div>
                                 </div>
                             )}
                         </div>
